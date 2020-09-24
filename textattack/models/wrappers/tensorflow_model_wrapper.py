@@ -21,3 +21,6 @@ class TensorFlowModelWrapper(ModelWrapper):
         text_array = np.array(text_input_list)
         preds = self.model(text_array)
         return preds.numpy()
+
+    def get_grads(self, text_list, loss_fn):
+        raise NotImplementedError()

@@ -74,17 +74,19 @@ def validate_model_goal_function_compatibility(goal_function_class, model_class)
     return True
 
 
-def validate_model_gradient_word_swap_compatibility(model):
-    """Determines if ``model`` is task-compatible with
-    ``radientBasedWordSwap``.
+def validate_model_gradient_word_swap_compatibility(model_wrapper):
+    """Determines if ``model_wrapper`` is task-compatible with
+    ``GradientBasedWordSwap``.
 
     We can only take the gradient with respect to an individual word if
     the model uses a word-based tokenizer.
     """
-    if isinstance(model, textattack.models.helpers.LSTMForClassification):
+    test_case = ["Hello this is a test case."]
+    try:
+        grad_output = model_wrapper.get_grads(test_case)
         return True
-    else:
-        raise ValueError(f"Cannot perform GradientBasedWordSwap on model {model}.")
+    except:
+        raise ValueError(f"Cannot perform GradientBasedWordSwap on model {model_wrapper}.")
 
 
 def transformation_consists_of(transformation, transformation_classes):

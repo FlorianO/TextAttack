@@ -79,3 +79,6 @@ class AutoTokenizer:
             return list_of_dicts
         else:
             return [self.encode(input_text) for input_text in input_text_list]
+
+    def convert_ids_to_tokens(self, ids):
+        return self.tokenizer.convert_ids_to_tokens(ids)

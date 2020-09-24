@@ -30,3 +30,6 @@ class BERTForClassification:
         # IDs.
         pred = self.model(input_ids=input_ids)[0]
         return torch.nn.functional.softmax(pred, dim=-1)
+
+    def get_input_embeddings(self):
+        return self.model.get_input_embeddings()
